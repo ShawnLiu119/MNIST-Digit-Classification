@@ -21,21 +21,25 @@ Please refer to the final report
 This section provides an overview of the proposed methodology for hand-written digits recognition experiments conducted in this study. Figure. 2 depict the overall process with key phases laid out starting from data collection to model result evaluation and interpretation.
 
 ![image](https://user-images.githubusercontent.com/43327902/185507781-6389fed3-d220-4f28-baa8-8be208a21893.png)
+
 Figure 2. Proposed research methodology
 
 ##### Data Collection
 The MNIST image datasets is assembled by the National Institute of Standards and Technology (NIST) in the 1980s. It comes with a set of 60,000 training images and 10,000 test images of processed hand-written digits from 0 to 9, which have been configured to 28 * 28 pixels in size decreased. The data is pre-loaded in Keras by Google Tensorflow and could be easily loaded as NumPy arrays. Figure 3 shows an example of digit 0 from MNIST data.  
 
 ![image](https://user-images.githubusercontent.com/43327902/185507821-3603ab07-eff2-4aac-96f4-e728e03f201a.png)
+
 Figure 3. Example of NumPy array configured from hand-written image
 
 ##### Data Exploration and Visualization
 Since the classification might be skewed by relative sample size by different digit categories, a close investigation of distribution by digit category has been conducted on both training and test datasets as demonstrated in Figure 4 and 5.  
 
 ![image](https://user-images.githubusercontent.com/43327902/185507905-84d5746b-e1d0-4541-a7ef-438dd011b393.png)
+
 Figure 4. Training sample size by digit category
 
 ![image](https://user-images.githubusercontent.com/43327902/185507930-7e8d50a1-855d-461c-8337-74eee566418d.png)
+
 Figure 5. Test sample size by digit category
 
 The similarity of distribution between training and test dataset could be identified as that instances have approximately even distribution across 10 digits. Number 1 accounts for the highest number of instances (6,742 training instances, 1,135 test instances), whereas number 5 is the digit with lowest number of instances (5,421 training instances, 892 test instances). 
@@ -48,6 +52,7 @@ Data normalization is a necessary step to take before the digit data is fed into
 The baseline model has been trained on full sets of 784 pixels, in additional to which feature engineering work has been implemented to detect the most discriminating features and explore the possibility of reducing dimensions and how the consolidated features would impact the model performance. Some sample codes and visualization of PCA and Random Forest have been shown in Figure 6 and Figure 7. 
 
 ![image](https://user-images.githubusercontent.com/43327902/185508062-0575b3bd-2550-4382-a8fb-0790a64c2ed3.png)
+
 Figure 7. Heatmap of feature importance identified by Random Forest
 
 
@@ -56,6 +61,7 @@ DNN (Dense Neural Network) is solely tasked to handle the classification of hand
 network model structure (1 dense hidden layer) with number of hidden nodes as the only tunable hyperparameter. The alternative value of number of hidden nodes including 2, 128, 196, 392 and 532 are testified. In experiment 4, PCA (Principal Component Analysis) is brought in to transform the original features and consolidate to 154 principal components, which is fed into DNN classification model with 196 hidden nodes as identified optimal in experiment 3. In experiment 5, the pre-defined attribute of feature importance identification by random forest is utilized to prune the original pixel features to 70 based on its importance level and then fed into DNN classification model for training and test purpose. 
 
 ![image](https://user-images.githubusercontent.com/43327902/185508172-81abbf3d-337d-4ca7-b365-7fb55d9debbd.png)
+
 Figure 8. Model Design & Structure
 
 ##### Result
@@ -65,11 +71,13 @@ trained on 154 features transformed based on PCA surpasses the other two with 97
 
 ![image](https://user-images.githubusercontent.com/43327902/185508226-f46799cd-91fb-474f-adad-336a3e5764b7.png)
 ![image](https://user-images.githubusercontent.com/43327902/185508236-1d258dcb-f09c-4b88-8d26-a33eac45d2ab.png)
+
 Figure 9. Model performance comparison – DNN by different number of hidden nodes
 
 As expected, the model that’s been trained on 70 features selected based on Random Forest, delivers 93.01% accuracy which makes sense that the trimming down of features may cause loss of information hence lower the prediction precision. 
 
 ![image](https://user-images.githubusercontent.com/43327902/185508277-f3eaa276-3a01-4edc-9d9f-4339095490c4.png)
+
 Figure 10. Model performance comparison by different feature dimension
 
 ### Conclusion
